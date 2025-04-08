@@ -54,7 +54,6 @@ server.setRequestHandler(AuthGetTokenSchema, async (request: Request) => {
     },
     body: JSON.stringify({ signature, signingDate, type, wallet })
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -81,7 +80,6 @@ server.setRequestHandler(AuthValidateTokenSchema, async (request: Request) => {
       "X-API-KEY": process.env.CLUSTERS_API_KEY || ""
     }
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -98,11 +96,6 @@ server.setRequestHandler(AuthValidateTokenSchema, async (request: Request) => {
 const CreateClusterSchema = z.object({
   method: z.literal("create_cluster"),
   params: z.object({
-    wallets: z.array(z.object({
-      address: z.string(),
-      name: z.string(),
-      isPrivate: z.boolean()
-    })),
     authKey: z.string(),
     testnet: z.boolean().optional()
   })
@@ -110,17 +103,15 @@ const CreateClusterSchema = z.object({
 
 server.setRequestHandler(CreateClusterSchema, async (request: Request) => {
   const params = request.params as z.infer<typeof CreateClusterSchema>["params"];
-  const { wallets, authKey, testnet } = params;
+  const { authKey, testnet } = params;
   const response = await fetch(`https://api.clusters.xyz/v1/clusters${testnet ? '?testnet=true' : ''}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${authKey}`,
       "X-API-KEY": process.env.CLUSTERS_API_KEY || ""
-    },
-    body: JSON.stringify(wallets)
+    }
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -230,7 +221,6 @@ server.setRequestHandler(AddWalletsSchema, async (request: Request) => {
     },
     body: JSON.stringify(wallets)
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -263,7 +253,6 @@ server.setRequestHandler(GenerateWalletSchema, async (request: Request) => {
     },
     body: JSON.stringify({ type, name, isPrivate })
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -297,7 +286,6 @@ server.setRequestHandler(UpdateWalletsSchema, async (request: Request) => {
     },
     body: JSON.stringify(wallets)
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -328,7 +316,6 @@ server.setRequestHandler(RemoveWalletsSchema, async (request: Request) => {
     },
     body: JSON.stringify(addresses)
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -358,7 +345,6 @@ server.setRequestHandler(VerifyWalletSchema, async (request: Request) => {
       "X-API-KEY": process.env.CLUSTERS_API_KEY || ""
     }
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -416,7 +402,6 @@ server.setRequestHandler(GetBulkDataByAddressesSchema, async (request: Request) 
     },
     body: JSON.stringify(addresses)
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -482,7 +467,6 @@ server.setRequestHandler(CheckNameAvailabilitySchema, async (request: Request) =
     },
     body: JSON.stringify(names)
   });
-  
   const data = await response.json();
   return {
     content: [{
@@ -517,7 +501,6 @@ server.setRequestHandler(GetRegistrationSignDataSchema, async (request: Request)
     },
     body: JSON.stringify({ network,sender, names, referralClusterId })
   });
-  
   const data = await response.json();
   return {
     content: [{

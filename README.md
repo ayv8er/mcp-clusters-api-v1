@@ -51,7 +51,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"auth_validate_token","params":{"authKey"
 
 #### Create Cluster
 ```bash
-echo '{"jsonrpc":"2.0","id":1,"method":"create_cluster","params":{"wallets":[{"address":"0x123...","name":"MyWallet","isPrivate":false}],"authKey":"your-auth-key","testnet":false}}' | node dist/index.js
+echo '{"jsonrpc":"2.0","id":1,"method":"create_cluster","params":{"authKey":"your-auth-key","testnet":false}}' | node dist/index.js
 ```
 
 #### Get Cluster by ID
