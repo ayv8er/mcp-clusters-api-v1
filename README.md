@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/ayv8er-mcp-clusters-api-v1-badge.png)](https://mseep.ai/app/ayv8er-mcp-clusters-api-v1)
+
 # MCP Server - Clusters API v1
 
 This is a Model Context Protocol (MCP) server implementation for the Clusters API v1. It provides endpoints for authentication, cluster management, name registration, and more.
